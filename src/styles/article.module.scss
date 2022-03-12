@@ -1,13 +1,15 @@
+@import "./tokens";
+
 .article {
   border-radius: 0;
   border: none;
 
   .link {
     text-decoration: none;
-    color: #222222;
+    color: $elephant;
 
     :hover {
-      color: #0d6efd;
+      color: $whale;
     }
   }
 
@@ -18,9 +20,9 @@
   }
 
   .btn {
-    border: 3px solid #ff89b1;
+    border: 3px solid $ant;
     border-radius: 8px;
-    background: #e91e63;
+    background: $cat;
     box-shadow: none !important;
   }
 

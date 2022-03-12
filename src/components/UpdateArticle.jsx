@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Col, Container, Row, Form, Button } from "react-bootstrap";
 import Header from "./common/Header";
 import styles from "../styles/updateArticle.module.scss";
+import Footer from "./common/Footer";
 
 function UpdateArticle({ onUpdate }) {
   const params = useParams();
@@ -86,6 +87,7 @@ function UpdateArticle({ onUpdate }) {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 

@@ -1,4 +1,4 @@
-@import "./partials.scss";
+@import "./tokens";
 
 .header {
   width: 100%;
@@ -6,7 +6,7 @@
   position: relative;
 
   .navbar {
-    background: #222222 !important;
+    background: $elephant !important;
     min-height: 70px;
 
     .brand {
@@ -26,14 +26,14 @@
     .link {
       text-decoration: none;
       color: #fff;
-      background: #2d3642;
+      background: $lion;
       padding: 0.7em 0.4em;
       height: 100%;
       border-radius: 5px;
       transition: 0.7s;
 
       &:hover {
-        background: #222;
+        background: $elephant;
       }
     }
 

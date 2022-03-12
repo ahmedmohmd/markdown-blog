@@ -2,6 +2,7 @@ import React from "react";
 import Article from "./common/Article";
 import Header from "./common/Header";
 import styles from "../styles/articles.module.scss";
+import Footer from "./common/Footer";
 
 function Articles({ articles, onDelete, onNext, onPrev, next, prev }) {
   return (
@@ -50,6 +51,7 @@ function Articles({ articles, onDelete, onNext, onPrev, next, prev }) {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

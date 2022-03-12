@@ -1,15 +1,12 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import styled from "styled-components";
+import styles from "../../styles/footer.module.scss";
 
-const FooterStyle = styled.div``;
 function Footer() {
   return (
-    <FooterStyle className="text-center">
-      <Container>
-        <span>Ahmed Mohamed</span>
-      </Container>
-    </FooterStyle>
+    <div className={styles.footer + " text-center"}>
+      <div className={styles.info}>Made By 🐼 Ahmed Mohamed</div>
+    </div>
   );
 }
 

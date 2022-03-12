@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Col, Container, Row, Form, Button } from "react-bootstrap";
 import Header from "./common/Header";
 import styles from "../styles/createArticle.module.scss";
+import Footer from "./common/Footer";
 
 function CreateArticle({ onCreate }) {
   const [formData, setFormData] = useState({
@@ -69,6 +70,8 @@ function CreateArticle({ onCreate }) {
           </Col>
         </Row>
       </div>
+
+      <Footer />
     </div>
   );
 

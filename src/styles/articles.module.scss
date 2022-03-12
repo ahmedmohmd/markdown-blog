@@ -1,13 +1,18 @@
-@import "./partials";
+@import "./tokens";
 
 .articles {
-  padding-bottom: 25px;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
 
   .content {
     border-radius: 5px;
     align-items: stretch !important;
 
-    background: #eaf0f2;
+    background: $chetah;
     padding: 1em;
     gap: 10px;
     display: inline-flex !important;
