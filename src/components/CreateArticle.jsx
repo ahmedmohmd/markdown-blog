@@ -23,7 +23,6 @@ const CreateArticleStyle = styled.div`
       :before {
         content: "";
         position: absolute;
-        left: 48%;
         bottom: 0;
         height: 5px;
         width: 55px;
@@ -89,6 +88,11 @@ const CreateArticleStyle = styled.div`
       :focus {
         border: 3px solid #0099ffba;
       }
+
+      ::placeholder {
+        font-weight: normal;
+        color: #777;
+      }
     }
 
     textarea {
@@ -102,6 +106,10 @@ const CreateArticleStyle = styled.div`
       :focus {
         border: 3px solid #0099ffba;
       }
+      ::placeholder {
+        font-weight: normal;
+        color: #777;
+      }
     }
 
     .btn {
@@ -113,8 +121,13 @@ const CreateArticleStyle = styled.div`
   }
 `;
 
-function CreateArticle() {
+function CreateArticle({ onCreate }) {
   const [formData, setFormData] = useState({
+    title: "",
+    markdown: "",
+  });
+
+  const [errors, setErrors] = useState({
     title: "",
     markdown: "",
   });
@@ -146,20 +159,10 @@ function CreateArticle() {
                     setFormData({ ...formData, title: event.target.value })
                   }
                 />
+                {errors.title ? (
+                  <div className="alert alert-danger mt-1">{errors.title}</div>
+                ) : null}
               </Form.Group>
-              {/* <Form.Group className="mb-3" controlId="articleCover">
-                <Form.Label className="badge bg-primary">
-                  Email address
-                </Form.Label>
-                <Form.Control
-                  type="file"
-                  id="articleCover"
-                  placeholder="Enter Title..."
-                  onChange={(event) =>
-                    setFormData({ ...formData, title: event.target.value })
-                  }
-                />
-              </Form.Group> */}
 
               <Form.Group className="mb-3" controlId="articleMarkdown">
                 <Form.Label className="badge bg-primary">Markdown</Form.Label>
@@ -172,6 +175,11 @@ function CreateArticle() {
                   }
                   placeholder="Enter Markdown..."
                 ></textarea>
+                {errors.markdown ? (
+                  <div className="alert alert-danger mt-1">
+                    {errors.markdown}
+                  </div>
+                ) : null}
               </Form.Group>
 
               <Button variant="primary" type="submit" className="btn">
@@ -184,9 +192,27 @@ function CreateArticle() {
     </CreateArticleStyle>
   );
 
-  function submitHandler() {
-    createArticle(formData);
-    navigate("/articles");
+  async function submitHandler(event) {
+    event.preventDefault();
+
+    if (formData.title && formData.markdown) {
+      createArticle(formData);
+      onCreate();
+      navigate(`/articles`);
+    } else {
+      if (!formData.title && !formData.markdown) {
+        setErrors({
+          markdown: "Markdown Field is Requires",
+          title: "Title Field is Requires",
+        });
+      } else if (!formData.markdown) {
+        setErrors({ title: "", markdown: "Markdown Field is Requires" });
+      } else if (!formData.title) {
+        return setErrors({ markdown: "", title: "Title Field is Requires" });
+      } else {
+        setErrors({ title: "", markdown: "" });
+      }
+    }
   }
 }
 

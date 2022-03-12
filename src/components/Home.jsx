@@ -53,7 +53,16 @@ function Home() {
           <Col>
             <div className="content d-flex justify-content-center align-items-center">
               <div className="info">
-                <h1>Markdown blog</h1>
+                <h1>
+                  <span style={{ color: "#222", fontFamily: "Black Ops One" }}>
+                    M
+                  </span>
+                  arkdown{" "}
+                  <span style={{ color: "#222", fontFamily: "Black Ops One" }}>
+                    B
+                  </span>
+                  log
+                </h1>
                 <p>You can write your own MarkDown Blogs by easy Way.</p>
               </div>
             </div>

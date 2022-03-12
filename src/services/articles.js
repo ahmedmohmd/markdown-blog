@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const url = "https://ahmed-markdown-blog.herokuapp.com";
+const url = "https://markdown-blog-backend.herokuapp.com";
 
-const getArticles = async () => {
+const getArticles = async (page) => {
   try {
-    const res = axios.get(`${url}/api/articles`);
-    const { data: articles } = await res;
-    return articles;
+    const res = axios.get(`${url}/api/articles?limit=4&page=${page}`);
+    const { data } = await res;
+    return data;
   } catch (error) {
     return error.message;
   }
@@ -25,8 +25,10 @@ const getArticle = async (articleSlug) => {
 const createArticle = async (article) => {
   try {
     const { title, markdown } = article;
-    axios.post(`${url}/api/articles/new`, { title, markdown });
-    return "Aticle Created Successfult";
+    axios.post(`${url}/api/articles/new`, {
+      title,
+      markdown,
+    });
   } catch (error) {
     return error.message;
   }

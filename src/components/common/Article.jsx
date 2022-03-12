@@ -37,7 +37,7 @@ const ArticleStyle = styled.div`
   }
 `;
 
-function Article({ article, onDelete }) {
+function Article({ article }) {
   const navigate = useNavigate();
 
   return (
@@ -61,9 +61,10 @@ function Article({ article, onDelete }) {
 
           <Card.Text
             dangerouslySetInnerHTML={{
-              __html: article.sanitizedHtml
-                .substr(0, 50)
-                .replace(/<[^>]*(>|$)| |‌|»|«|>/g, " "),
+              __html:
+                article.sanitizedHtml
+                  .substr(0, 40)
+                  .replace(/<[^>]*(>|$)| |‌|»|«|>/g, " ") + ".....",
             }}
           ></Card.Text>
 

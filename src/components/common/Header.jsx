@@ -27,8 +27,6 @@ const HeaderStyle = styled.div`
   }
 
   .links {
-    height: 100%;
-
     .link.active {
       color: #fff !important;
       background: #0099ff !important;

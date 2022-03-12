@@ -105,7 +105,7 @@ const FullArticleStyle = styled.div`
   }
 `;
 
-function FullArticle() {
+function FullArticle({ onDelete }) {
   const [article, setArticle] = useState({});
   const params = useParams();
   const navigate = useNavigate();
@@ -157,6 +157,7 @@ function FullArticle() {
   );
 
   function deleteArticleHandler() {
+    onDelete();
     deleteAricle(article.slug);
     navigate("/articles");
   }

@@ -23,8 +23,8 @@ const UpdateArticleStyle = styled.div`
 
       :before {
         content: "";
+        content: "";
         position: absolute;
-        left: 48%;
         bottom: 0;
         height: 5px;
         width: 55px;
@@ -90,6 +90,11 @@ const UpdateArticleStyle = styled.div`
       :focus {
         border: 3px solid #0099ffba;
       }
+
+      ::placeholder {
+        font-weight: normal;
+        color: #777;
+      }
     }
 
     textarea {
@@ -102,6 +107,11 @@ const UpdateArticleStyle = styled.div`
 
       :focus {
         border: 3px solid #0099ffba;
+      }
+
+      ::placeholder {
+        font-weight: normal;
+        color: #777;
       }
     }
 
@@ -126,6 +136,11 @@ function UpdateArticle({ onUpdate }) {
     title: articleData.title,
     markdown: articleData.markdown,
   });
+  const [errors, setErrors] = useState({
+    title: "",
+    markdown: "",
+  });
+
   useEffect(() => {
     const getData = async () => {
       const article = await getArticle(params.slug);
@@ -140,7 +155,7 @@ function UpdateArticle({ onUpdate }) {
       <Header />
       <Container>
         <div className="heading">
-          <h1>Create Article</h1>
+          <h1>Update Article</h1>
           <span className="line-one"></span>
           <span className="line-two"></span>
         </div>
@@ -149,7 +164,9 @@ function UpdateArticle({ onUpdate }) {
           <Col>
             <Form onSubmit={submitHandler} className="form">
               <Form.Group className="mb-3" controlId="articleTitle">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label className="badge bg-primary">
+                  Email address
+                </Form.Label>
                 <Form.Control
                   type="text"
                   id="articleTitle"
@@ -159,10 +176,13 @@ function UpdateArticle({ onUpdate }) {
                   }
                   value={formData.title}
                 />
+                {errors.title ? (
+                  <div className="alert alert-danger mt-1">{errors.title}</div>
+                ) : null}
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="articleMarkdown">
-                <Form.Label>Markdown</Form.Label>
+                <Form.Label className="badge bg-primary">Markdown</Form.Label>
                 <textarea
                   className="form-control"
                   id="articleMarkdown"
@@ -173,6 +193,11 @@ function UpdateArticle({ onUpdate }) {
                   value={formData.markdown}
                   placeholder="Enter Markdown..."
                 ></textarea>
+                {errors.markdown ? (
+                  <div className="alert alert-danger mt-1">
+                    {errors.markdown}
+                  </div>
+                ) : null}
               </Form.Group>
 
               <Button variant="primary" type="submit" className="btn">
@@ -185,11 +210,27 @@ function UpdateArticle({ onUpdate }) {
     </UpdateArticleStyle>
   );
 
-  function submitHandler(e) {
-    e.preventDefault();
-    updateArticle(params.slug, formData);
-    navigate("/articles");
-    onUpdate(params.slug, formData);
+  function submitHandler(event) {
+    event.preventDefault();
+
+    if (formData.title && formData.markdown) {
+      updateArticle(params.slug, formData);
+      onUpdate();
+      navigate("/articles");
+    } else {
+      if (!formData.title && !formData.markdown) {
+        setErrors({
+          markdown: "Markdown Field is Requires",
+          title: "Title Field is Requires",
+        });
+      } else if (!formData.markdown) {
+        setErrors({ title: "", markdown: "Markdown Field is Requires" });
+      } else if (!formData.title) {
+        return setErrors({ markdown: "", title: "Title Field is Requires" });
+      } else {
+        setErrors({ title: "", markdown: "" });
+      }
+    }
   }
 }
 

@@ -56,26 +56,61 @@ const ArticlesStyle = styled.div`
       }
     }
   }
+
+  .btns-parent {
+    display: flex;
+    justify-content: center;
+    align-itesm: center;
+
+    .btns {
+      display: flex;
+      justify-content: center;
+      align-itesm: center;
+      gap: 10px;
+    }
+  }
 `;
 
-function Articles({ articles, onDelete }) {
+function Articles({ articles, onDelete, onNext, onPrev, next, prev }) {
   return (
     <ArticlesStyle>
       <Header />
       <Container>
-        <Row>
-          <Col sm={12}>
+        <Row className="gap-3">
+          <Col
+            sm={12}
+            className="d-flex justify-content-center align-items-center"
+          >
             <div className="heading">
               <h1>Articles</h1>
               <span className="line-one"></span>
               <span className="line-two"></span>
             </div>
           </Col>
-          <Col sm={12}>
+          <Col
+            sm={12}
+            className="d-flex justify-content-center align-items-center"
+          >
             <div className="content d-flex justify-content-start flex-wrap align-items-center">
               {articles.map((article) => (
-                <Article article={article} onDelete={onDelete} />
+                <Article article={article} />
               ))}
+            </div>
+          </Col>
+          <Col sm={12} className="btns-parent">
+            <div className="btns">
+              <button
+                className={"prev btn btn-primary " + (!prev ? "disabled" : "")}
+                onClick={onPrev}
+              >
+                Prev
+              </button>
+              <button
+                className={"next btn btn-primary " + (!next ? "disabled" : "")}
+                onClick={onNext}
+              >
+                Next
+              </button>
             </div>
           </Col>
         </Row>
