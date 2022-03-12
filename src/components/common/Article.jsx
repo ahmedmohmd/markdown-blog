@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, Row, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/article.module.scss";
@@ -32,13 +32,12 @@ function Article({ article }) {
           }}
         ></Card.Text>
 
-        <Button
-          variant="primary"
+        <button
           onClick={() => navigate(`/${article.slug}`)}
           className={styles.btn}
         >
           Read
-        </Button>
+        </button>
       </Card.Body>
     </Card>
   );

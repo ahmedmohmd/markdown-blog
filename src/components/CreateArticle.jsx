@@ -26,7 +26,6 @@ function CreateArticle({ onCreate }) {
         <div className={styles.header}>
           <h1>Create Article</h1>
         </div>
-
         <Row>
           <Col>
             <Form onSubmit={submitHandler} className={styles.form}>
@@ -70,7 +69,6 @@ function CreateArticle({ onCreate }) {
           </Col>
         </Row>
       </div>
-
       <Footer />
     </div>
   );
