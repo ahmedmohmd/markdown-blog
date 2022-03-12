@@ -20,7 +20,7 @@ const HeaderStyle = styled.div`
         justify-content: center;
         text-align: center;
         font-family: "Black Ops One";
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: #fff;
       }
     }
