@@ -38,5 +38,12 @@ This is a [**Markdown Blog**](https://markdown-blog-orcin.vercel.app/) web app t
 
 -----
 
+### Other Technolohies & Libs:
+  - [**__react-router__**](https://reactrouter.com/)
+  - [**__axios__**](https://axios-http.com/)
+  - [**__react-bootstrap__**](https://react-bootstrap.github.io/)
+
+-----
+
 # Web App Screenshot
 ![Weather App Image](https://github.com/ahmedmohmd/to-do-app/blob/main/app-screenshot.png?raw=true)
