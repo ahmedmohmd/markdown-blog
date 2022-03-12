@@ -93,7 +93,7 @@ function Articles({ articles, onDelete, onNext, onPrev, next, prev }) {
           >
             <div className="content d-flex justify-content-start flex-wrap align-items-center">
               {articles.map((article) => (
-                <Article article={article} />
+                <Article article={article} onDelete={onDelete} />
               ))}
             </div>
           </Col>

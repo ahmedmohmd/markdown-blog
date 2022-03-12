@@ -169,7 +169,6 @@ function UpdateArticle({ onUpdate }) {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  id="articleTitle"
                   placeholder="Enter Title..."
                   onChange={(event) =>
                     setFormData({ ...formData, title: event.target.value })
@@ -185,7 +184,6 @@ function UpdateArticle({ onUpdate }) {
                 <Form.Label className="badge bg-primary">Markdown</Form.Label>
                 <textarea
                   className="form-control"
-                  id="articleMarkdown"
                   rows="8"
                   onChange={(event) =>
                     setFormData({ ...formData, markdown: event.target.value })
@@ -214,8 +212,10 @@ function UpdateArticle({ onUpdate }) {
     event.preventDefault();
 
     if (formData.title && formData.markdown) {
-      updateArticle(params.slug, formData);
-      onUpdate();
+      updateArticle(params.slug, formData).then((newArticle) =>
+        onUpdate(params.slug, newArticle)
+      );
+
       navigate("/articles");
     } else {
       if (!formData.title && !formData.markdown) {

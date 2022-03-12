@@ -153,7 +153,6 @@ function CreateArticle({ onCreate }) {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  id="articleTitle"
                   placeholder="Enter Title..."
                   onChange={(event) =>
                     setFormData({ ...formData, title: event.target.value })
@@ -168,7 +167,6 @@ function CreateArticle({ onCreate }) {
                 <Form.Label className="badge bg-primary">Markdown</Form.Label>
                 <textarea
                   className="form-control"
-                  id="articleMarkdown"
                   rows="8"
                   onChange={(event) =>
                     setFormData({ ...formData, markdown: event.target.value })
@@ -196,8 +194,9 @@ function CreateArticle({ onCreate }) {
     event.preventDefault();
 
     if (formData.title && formData.markdown) {
-      createArticle(formData);
-      onCreate();
+      createArticle(formData).then((article) => {
+        onCreate(article);
+      });
       navigate(`/articles`);
     } else {
       if (!formData.title && !formData.markdown) {

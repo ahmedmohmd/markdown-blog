@@ -157,8 +157,8 @@ function FullArticle({ onDelete }) {
   );
 
   function deleteArticleHandler() {
-    onDelete();
     deleteAricle(article.slug);
+    onDelete(article.slug);
     navigate("/articles");
   }
 }

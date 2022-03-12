@@ -25,10 +25,12 @@ const getArticle = async (articleSlug) => {
 const createArticle = async (article) => {
   try {
     const { title, markdown } = article;
-    axios.post(`${url}/api/articles/new`, {
+    const res = await axios.post(`${url}/api/articles/new`, {
       title,
       markdown,
     });
+    const { data } = await res;
+    return data;
   } catch (error) {
     return error.message;
   }
@@ -37,10 +39,13 @@ const createArticle = async (article) => {
 const updateArticle = async (articleSlug, newArticleData) => {
   const { title, markdown } = newArticleData;
   try {
-    axios.patch(`${url}/api/articles/edit/${articleSlug}`, {
+    const res = await axios.patch(`${url}/api/articles/edit/${articleSlug}`, {
       title,
       markdown,
     });
+
+    const { data } = await res;
+    return data;
   } catch (error) {
     return error.message;
   }

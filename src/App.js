@@ -24,7 +24,7 @@ function App() {
     };
 
     getData();
-  }, [page, reload]);
+  }, [page]);
 
   return (
     <div className="App">
@@ -58,16 +58,21 @@ function App() {
     </div>
   );
 
-  function updateHandler() {
-    setReload(!reload);
+  function updateHandler(slug, newArticle) {
+    const index = articles.findIndex((article) => article.slug === slug);
+    const newArticles = [...articles];
+    newArticles[index] = newArticle;
+    setArticles(newArticles);
   }
 
-  function createHandler() {
-    setReload(!reload);
+  function createHandler(article) {
+    setArticles([...articles, article]);
   }
 
-  function deleteHandler() {
-    setReload(!reload);
+  function deleteHandler(slug) {
+    const article = articles.find((article) => article.slug === slug);
+    const newArticles = articles.filter((ar) => ar.slug !== article.slug);
+    setArticles(newArticles);
   }
 
   function nextPageHandler() {
