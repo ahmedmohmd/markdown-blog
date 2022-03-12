@@ -73,7 +73,7 @@ function Header() {
       >
         <Container>
           <Navbar.Brand className="brand">
-            <Link to="/">Simple Blog</Link>
+            <Link to="/">Markdown blog</Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
