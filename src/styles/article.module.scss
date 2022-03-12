@@ -1,0 +1,30 @@
+.article {
+  border-radius: 0;
+  border: none;
+
+  .link {
+    text-decoration: none;
+    color: #222222;
+
+    :hover {
+      color: #0d6efd;
+    }
+  }
+
+  .date {
+    font-weight: bold;
+    color: #777;
+    padding-bottom: 15px;
+  }
+
+  .btn {
+    border: 3px solid #ff89b1;
+    border-radius: 8px;
+    background: #e91e63;
+    box-shadow: none !important;
+  }
+
+  @media (max-width: 320px) {
+    width: 250px !important;
+  }
+}

@@ -2,127 +2,9 @@ import React, { useState } from "react";
 import { getArticle, updateArticle } from "../services/articles";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import styled from "styled-components";
 import { Col, Container, Row, Form, Button } from "react-bootstrap";
 import Header from "./common/Header";
-
-const UpdateArticleStyle = styled.div`
-  div.heading {
-    padding-bottom: 25px;
-
-    h1 {
-      text-transform: uppercase;
-      font-weight: 500;
-      letter-spacing: 0;
-      line-height: 1.5em;
-      padding-bottom: 15px;
-      padding-top: 50px;
-      position: relative;
-      color: #333333;
-      text-align: center;
-
-      :before {
-        content: "";
-        content: "";
-        position: absolute;
-        bottom: 0;
-        height: 5px;
-        width: 55px;
-        background-color: #c6c6c6;
-        tranform: translateX(-50%);
-      }
-
-      :after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: 2px;
-        height: 1px;
-        width: 95%;
-        max-width: 255px;
-        background-color: #c6c6c6;
-        transform: translateX(-50%);
-      }
-    }
-  }
-
-  .form {
-    background: #eaf0f2;
-    padding: 40px;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 250px;
-    width: 750px;
-    max-width: 900px;
-    border-radius: 15px;
-    border: 7px solid #d3d7d9;
-    margin-bottom: 40px;
-
-    @media (max-width: 425px) {
-      width: 375px;
-      padding: 25px;
-    }
-
-    @media (max-width: 375px) {
-      width: 350px;
-      padding: 20px;
-    }
-
-    @media (max-width: 325px) {
-      width: 300px;
-      padding: 15px;
-    }
-
-    #articleTitle {
-      height: 55px;
-    }
-
-    input {
-      outline: none;
-      border: none;
-      font-weight: bold;
-      font-size: 1.2em;
-      box-shadow: none;
-      border: 3px solid transparent;
-
-      :focus {
-        border: 3px solid #0099ffba;
-      }
-
-      ::placeholder {
-        font-weight: normal;
-        color: #777;
-      }
-    }
-
-    textarea {
-      outline: none;
-      border: none;
-      resize: none;
-      font-size: 1.1em;
-      box-shadow: none;
-      border: 3px solid transparent;
-
-      :focus {
-        border: 3px solid #0099ffba;
-      }
-
-      ::placeholder {
-        font-weight: normal;
-        color: #777;
-      }
-    }
-
-    .btn {
-      border: 4px solid #59ffce;
-      border-radius: 8px;
-      background: #20c997;
-      box-shadow: none !important;
-    }
-  }
-`;
+import styles from "../styles/updateArticle.module.scss";
 
 function UpdateArticle({ onUpdate }) {
   const params = useParams();
@@ -131,6 +13,7 @@ function UpdateArticle({ onUpdate }) {
     title: "",
     markdown: "",
   });
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: articleData.title,
@@ -151,18 +34,16 @@ function UpdateArticle({ onUpdate }) {
   }, []);
 
   return (
-    <UpdateArticleStyle>
+    <div className={styles.updateArticle}>
       <Header />
       <Container>
-        <div className="heading">
+        <div className={styles.header}>
           <h1>Update Article</h1>
-          <span className="line-one"></span>
-          <span className="line-two"></span>
         </div>
 
         <Row>
           <Col>
-            <Form onSubmit={submitHandler} className="form">
+            <Form onSubmit={submitHandler} className={styles.form}>
               <Form.Group className="mb-3" controlId="articleTitle">
                 <Form.Label className="badge bg-primary">
                   Email address
@@ -198,14 +79,14 @@ function UpdateArticle({ onUpdate }) {
                 ) : null}
               </Form.Group>
 
-              <Button variant="primary" type="submit" className="btn">
+              <Button variant="primary" type="submit" className={styles.btn}>
                 Update
               </Button>
             </Form>
           </Col>
         </Row>
       </Container>
-    </UpdateArticleStyle>
+    </div>
   );
 
   function submitHandler(event) {

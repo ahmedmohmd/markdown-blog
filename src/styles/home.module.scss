@@ -1,0 +1,46 @@
+@import "./partials";
+
+.home {
+  height: 100vh;
+  position: relative;
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    .info {
+      text-align: center;
+      color: $whale;
+
+      > h1 {
+        font-family: "Black Ops One";
+        overflow-wrap: break-word !important;
+        font-size: 90px;
+
+        @media (max-width: 425px) {
+          font-size: 60px;
+        }
+
+        @media (max-width: 320px) {
+          font-size: 50px;
+        }
+      }
+
+      > p {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  > img {
+    min-width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+}
