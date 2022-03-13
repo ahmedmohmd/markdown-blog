@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 import { getArticle, deleteAricle } from "../services/articles";
+import swal from "sweetalert";
 import Header from "./common/Header";
 import styles from "../styles/fullArticle.module.scss";
 
@@ -63,9 +64,25 @@ function FullArticle({ onDelete }) {
   );
 
   function deleteArticleHandler() {
-    deleteAricle(article.slug);
-    onDelete(article.slug);
-    navigate("/articles");
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, You will not be able to recover this Article file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("Article is Deleted Successfuly!", {
+          icon: "success",
+        });
+
+        deleteAricle(article.slug);
+        onDelete(article.slug);
+        navigate("/articles");
+      } else {
+        return;
+      }
+    });
   }
 }
 

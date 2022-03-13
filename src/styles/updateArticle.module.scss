@@ -114,10 +114,11 @@
     }
 
     .btn {
-      border: 3px solid $bee;
       border-radius: 8px;
       background: $rabbit;
       box-shadow: none !important;
+      border: none;
+      padding: 8px 12px;
     }
   }
 }

@@ -4,7 +4,7 @@ import styles from "../../styles/footer.module.scss";
 function Footer() {
   return (
     <div className={styles.footer + " text-center"}>
-      <div className={styles.info}>Made By 🐼 Ahmed Mohamed</div>
+      <div className={styles.info}>Made With 🐼 Ahmed Mohamed</div>
     </div>
   );
 }

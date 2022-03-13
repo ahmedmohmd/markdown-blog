@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Articles from "./components/Articles";
 import CreateArticle from "./components/CreateArticle";
 import { Routes, Route } from "react-router-dom";
-
+import swal from "sweetalert";
 import { getArticles } from "./services/articles";
 import UpdateArticle from "./components/UpdateArticle";
 import FullArticle from "./components/FullArticle";
@@ -63,16 +63,28 @@ function App() {
     const newArticles = [...articles];
     newArticles[index] = newArticle;
     setArticles(newArticles);
+    swal({
+      title: "Article is Updated Successfuly!",
+      icon: "success",
+    });
   }
 
   function createHandler(article) {
     setArticles([...articles, article]);
+    swal({
+      title: "Article is Created Successfuly!",
+      icon: "success",
+    });
   }
 
   function deleteHandler(slug) {
     const article = articles.find((article) => article.slug === slug);
     const newArticles = articles.filter((ar) => ar.slug !== article.slug);
     setArticles(newArticles);
+    // swal({
+    //   title: "Article is Deleted Successfuly!",
+    //   icon: "success",
+    // });
   }
 
   function nextPageHandler() {
