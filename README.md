@@ -36,8 +36,6 @@ This is a [**Markdown Blog**](https://markdown-blog-orcin.vercel.app/) web app t
   <a href="https://sass-lang.com/"><img src="https://static-00.iconduck.com/assets.00/sass-icon-512x512-wrsgqu3t.png" width="48" height="48"/></a>
 </div>
 
------
-
 ### Other Technolohies & Libs:
   - [**__react-router__**](https://reactrouter.com/)
   - [**__axios__**](https://axios-http.com/)
@@ -46,4 +44,4 @@ This is a [**Markdown Blog**](https://markdown-blog-orcin.vercel.app/) web app t
 -----
 
 # Web App Screenshot
-![Weather App Image](https://github.com/ahmedmohmd/markdown-blog/blob/main/app-screenshot.gif?raw=true)
+![Markdown Blog App Screenshot](https://github.com/ahmedmohmd/markdown-blog/blob/main/app-screenshot.gif?raw=true)
