@@ -46,4 +46,4 @@ This is a [**Markdown Blog**](https://markdown-blog-orcin.vercel.app/) web app t
 -----
 
 # Web App Screenshot
-![Weather App Image](https://github.com/ahmedmohmd/to-do-app/blob/main/app-screenshot.png?raw=true)
+![Weather App Image](https://github.com/ahmedmohmd/markdown-blog/blob/main/app-screenshot.gif?raw=true)
