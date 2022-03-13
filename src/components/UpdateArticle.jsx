@@ -47,7 +47,7 @@ function UpdateArticle({ onUpdate }) {
             <Form onSubmit={submitHandler} className={styles.form}>
               <Form.Group className="mb-3" controlId="articleTitle">
                 <Form.Label className="badge bg-primary">
-                  Email address
+                  Article Title
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -63,7 +63,9 @@ function UpdateArticle({ onUpdate }) {
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="articleMarkdown">
-                <Form.Label className="badge bg-primary">Markdown</Form.Label>
+                <Form.Label className="badge bg-primary">
+                  Article Content
+                </Form.Label>
                 <textarea
                   className="form-control"
                   rows="8"
