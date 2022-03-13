@@ -80,6 +80,7 @@ function CreateArticle({ onCreate }) {
       createArticle(formData).then((article) => {
         onCreate(article);
       });
+
       navigate(`/articles`);
     } else {
       if (!formData.title && !formData.markdown) {
