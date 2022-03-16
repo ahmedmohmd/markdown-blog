@@ -20,7 +20,7 @@ function UpdateArticle() {
   const [formData, setFormData] = useState({
     title: articleData.title,
     markdown: articleData.markdown,
-    cover: "",
+    cover: articleData.cover,
   });
   const [errors, setErrors] = useState({
     title: "",
@@ -70,6 +70,7 @@ function UpdateArticle() {
                 <Form.Control
                   type="url"
                   placeholder="Enter Image Url..."
+                  value={formData.cover}
                   onChange={(event) =>
                     setFormData({ ...formData, cover: event.target.value })
                   }
