@@ -1,0 +1,17 @@
+@import "./tokens";
+
+.footer {
+  background-color: $elephant;
+  bottom: 0;
+  width: 100%;
+  margin-top: 25px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 33px;
+
+  .info {
+    color: #fff;
+  }
+}
