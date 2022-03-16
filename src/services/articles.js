@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url = "https://markdown-blog-backend.herokuapp.com";
+// const url = "https://markdown-blog-backend.herokuapp.com";
+const url = "http://localhost:5000";
 
 const getArticles = async (page) => {
   try {

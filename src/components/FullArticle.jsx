@@ -5,6 +5,7 @@ import { getArticle, deleteAricle } from "../services/articles";
 import swal from "sweetalert";
 import Header from "./common/Header";
 import styles from "../styles/fullArticle.module.scss";
+import { AiFillEye } from "react-icons/ai";
 
 function FullArticle() {
   const [article, setArticle] = useState({});
@@ -38,6 +39,9 @@ function FullArticle() {
                 <h1>{article.title}</h1>
                 <span className={styles.date + " badge bg-primary"}>
                   Created at {new Date(article.createdAt).toLocaleDateString()}
+                </span>
+                <span className="badge bg-info">
+                  <AiFillEye /> <span>{article.clicks}</span>
                 </span>
                 <div className={styles.btns}>
                   <button
