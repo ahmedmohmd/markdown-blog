@@ -9,7 +9,14 @@ function Article({ article }) {
   console.log(article.cover);
   return (
     <Card className={styles.article} style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={article.cover || "./images/preview.jpg"} />
+      <Card.Img
+        variant="top"
+        src={article.cover || "./images/preview.jpg"}
+        style={{
+          width: "100%",
+          height: "275px",
+        }}
+      />
       <Card.Body>
         <Card.Title>
           <h3>

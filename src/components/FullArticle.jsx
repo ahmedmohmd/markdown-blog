@@ -79,8 +79,7 @@ function FullArticle() {
         deleteAricle(article.slug);
         swal("Article is Deleted Successfuly!", {
           icon: "success",
-        });
-        window.location = "/articles";
+        }).then(() => (window.location = "/articles"));
       } else {
         return;
       }
