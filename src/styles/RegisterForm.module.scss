@@ -52,6 +52,9 @@
     transform: translate(-50%, -50%);
     border-radius: 15px;
     border: 7px solid $butterfly;
+    min-width: 300px;
+    width: 750px;
+    max-width: 800px;
 
     @media (max-width: 425px) {
       width: 375px;

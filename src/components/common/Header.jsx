@@ -1,43 +1,89 @@
 import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { logOut } from "../../services/userService";
 import styles from "../../styles/header.module.scss";
 
-function Header() {
+function Header({ user }) {
+  const navigate = useNavigate();
   return (
     <div className={styles.header}>
-      <Navbar
-        className={styles.navbar}
-        collapseOnSelect
-        expand="lg"
-        bg="dark"
-        variant="dark"
+      <nav
+        className={
+          "navbar navbar-expand-lg navbar-dark bg-dark " + styles.navbar
+        }
       >
-        <Container>
-          <Navbar.Brand className={styles.brand}>
+        <div className="container">
+          <div className={"navbar-brand " + styles.brand}>
             <Link to="/">Markdown blog</Link>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav
+          </div>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="responsive-navbar-nav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div
               className={
-                styles.links + " me-auto gap-3 justify-content-end w-100 "
+                styles.links +
+                " navbar-nav me-auto gap-3 justify-content-end w-100"
               }
             >
-              <NavLink to="/" className={styles.link}>
+              <NavLink to="/" className={"nav-link " + styles.link}>
                 Home
               </NavLink>
-              <NavLink to="/articles" className={styles.link}>
+              <NavLink to="/allArticles" className={"nav-link " + styles.link}>
                 Articles
               </NavLink>
-              <NavLink to="/new" className={styles.link}>
-                Create Article
-              </NavLink>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+
+              {Object.keys(user).length > 1 ? (
+                <React.Fragment>
+                  <NavLink
+                    to="/dashboard"
+                    className={"nav-link " + styles.link}
+                    onClick={() => {
+                      setTimeout(() => {
+                        navigate("/dashboard/userData");
+                      }, 0);
+                    }}
+                  >
+                    Dashboard
+                  </NavLink>
+
+                  <NavLink
+                    to="/login"
+                    onClick={async () => {
+                      localStorage.removeItem("token");
+                      await logOut();
+                      window.location = "/login";
+                    }}
+                    className={"nav-link " + styles.link}
+                  >
+                    Logout
+                  </NavLink>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <NavLink to="/register" className={"nav-link " + styles.link}>
+                    Register
+                  </NavLink>
+
+                  <NavLink to="/login" className={"nav-link " + styles.link}>
+                    Login
+                  </NavLink>
+                </React.Fragment>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
     </div>
   );
 }

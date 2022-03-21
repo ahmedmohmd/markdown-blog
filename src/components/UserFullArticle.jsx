@@ -1,38 +1,43 @@
-import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
-import { getArticle, deleteAricle } from "../services/articles";
+import React, { useState, useEffect } from "react";
+import { getArticle, deleteAricle } from "../services/articleService";
 import swal from "sweetalert";
-import Header from "./common/Header";
-import styles from "../styles/fullArticle.module.scss";
+import styles from "../styles/UserFullArticle.module.scss";
 import { AiFillEye } from "react-icons/ai";
+import { toast, ToastContainer } from "react-toastify";
+import Header from "./common/Header";
+import { toastOptions } from "../helpers/tokens";
 
 function FullArticle() {
-  const [article, setArticle] = useState({});
   const params = useParams();
   const navigate = useNavigate();
+  const [article, setArticle] = useState({});
 
   useEffect(() => {
     const getData = async () => {
-      const article = await getArticle(params.slug);
-      setArticle(article);
+      try {
+        const { data } = await getArticle(params.slug);
+        setArticle(data);
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          toast.error(error.response.data, toastOptions);
+        }
+      }
     };
-    console.log(article);
     getData();
   }, []);
 
   return (
     <div className={styles.fullArticle}>
-      <Header />
+      {/* <Header /> */}
       <Container>
         <Row>
           <Col sm={12}>
             <div
               className={styles.header}
               style={{
-                backgroundImage: `url(${
-                  article.cover || "./images/cover.jpg"
-                })`,
+                backgroundImage: `url(${article.cover || "/images/cover.jpg"})`,
               }}
             >
               <div className={styles.headerContent}>
@@ -67,6 +72,7 @@ function FullArticle() {
             ></div>
           </Col>
         </Row>
+        <ToastContainer />
       </Container>
     </div>
   );
@@ -80,12 +86,16 @@ function FullArticle() {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        deleteAricle(article.slug);
-        swal("Article is Deleted Successfuly!", {
-          icon: "success",
-        }).then(() => (window.location = "/articles"));
-      } else {
-        return;
+        return deleteAricle(article.slug)
+          .then(() => {
+            toast.success("Article deleted Sucessfully", toastOptions);
+          })
+          .catch((error) => {
+            if (error.response && error.response.status === 404) {
+              toast.error(error.response.data, toastOptions);
+            }
+            setTimeout(() => (window.location = "/"), 3000);
+          });
       }
     });
   }

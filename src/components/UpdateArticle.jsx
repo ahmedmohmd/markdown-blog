@@ -1,36 +1,44 @@
+import Joi from "joi";
 import React, { useState } from "react";
-import swal from "sweetalert";
-import { getArticle, updateArticle } from "../services/articles";
-import { useParams, useNavigate } from "react-router-dom";
+import { getArticle, updateArticle } from "../services/articleService";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { Col, Container, Row, Form, Button } from "react-bootstrap";
+import { Col, Row, Form, Button } from "react-bootstrap";
+import { toast, ToastContainer } from "react-toastify";
+import { formValidate } from "../helpers/common";
+import { toastOptions } from "../helpers/tokens";
+import Footer from "./common/Footer";
 import Header from "./common/Header";
 import styles from "../styles/updateArticle.module.scss";
-import Footer from "./common/Footer";
+
+const schema = Joi.object({
+  title: Joi.string().required().label("Title"),
+  markdown: Joi.string().required().label("Markdown"),
+  cover: Joi.string().uri().optional().allow(""),
+});
 
 function UpdateArticle() {
   const params = useParams();
-
-  const [articleData, setArticleData] = useState({
-    title: "",
-    markdown: "",
-  });
-
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    title: articleData.title,
-    markdown: articleData.markdown,
-    cover: articleData.cover,
-  });
-  const [errors, setErrors] = useState({
-    title: "",
-    markdown: "",
-  });
+  const [formData, setFormData] = useState({});
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const getData = async () => {
-      const article = await getArticle(params.slug);
-      setFormData(article);
+      try {
+        const { data: article } = await getArticle(params.slug);
+        setFormData({
+          title: article.title,
+          cover: article.cover,
+          markdown: article.markdown,
+        });
+      } catch (error) {
+        if (
+          (error.response && error.response.status === 404) ||
+          error.response.status === 400
+        ) {
+          toast.error(error.response.data, toastOptions);
+        }
+      }
     };
 
     getData();
@@ -38,12 +46,10 @@ function UpdateArticle() {
 
   return (
     <div className={styles.updateArticle}>
-      <Header />
-      <Container>
+      <div className="container">
         <div className={styles.header}>
           <h1>Update Article</h1>
         </div>
-
         <Row>
           <Col>
             <Form onSubmit={submitHandler} className={styles.form}>
@@ -59,21 +65,21 @@ function UpdateArticle() {
                   }
                   value={formData.title}
                 />
-                {errors.title ? (
+                {errors.title && (
                   <div className="alert alert-danger mt-1">{errors.title}</div>
-                ) : null}
+                )}
               </Form.Group>
-              <Form.Group className="mb-3" controlId="articleImage">
+              <Form.Group className="mb-3" controlId="articleCover">
                 <Form.Label className="badge bg-primary">
                   Article Image
                 </Form.Label>
                 <Form.Control
                   type="url"
                   placeholder="Enter Image Url..."
-                  value={formData.cover}
                   onChange={(event) =>
                     setFormData({ ...formData, cover: event.target.value })
                   }
+                  value={formData.cover}
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="articleMarkdown">
@@ -86,14 +92,14 @@ function UpdateArticle() {
                   onChange={(event) =>
                     setFormData({ ...formData, markdown: event.target.value })
                   }
-                  value={formData.markdown}
                   placeholder="Enter Markdown..."
+                  value={formData.markdown}
                 ></textarea>
-                {errors.markdown ? (
+                {errors.markdown && (
                   <div className="alert alert-danger mt-1">
                     {errors.markdown}
                   </div>
-                ) : null}
+                )}
               </Form.Group>
 
               <Button variant="primary" type="submit" className={styles.btn}>
@@ -102,35 +108,29 @@ function UpdateArticle() {
             </Form>
           </Col>
         </Row>
-      </Container>
-      <Footer />
+        <ToastContainer />
+      </div>
     </div>
   );
 
-  function submitHandler(event) {
+  async function submitHandler(event) {
     event.preventDefault();
 
-    if (formData.title && formData.markdown) {
-      updateArticle(params.slug, formData).then((newArticle) => {
-        swal({
-          title: "Article is Updated Successfuly!",
-          icon: "success",
-        }).then(() => (window.location = "/articles"));
-      });
+    const validateResult = formValidate(formData, schema);
+    if (validateResult) return setErrors(validateResult);
 
-      navigate("/articles");
-    } else {
-      if (!formData.title && !formData.markdown) {
-        setErrors({
-          markdown: "Markdown Field is Requires",
-          title: "Title Field is Requires",
-        });
-      } else if (!formData.markdown) {
-        setErrors({ title: "", markdown: "Markdown Field is Requires" });
-      } else if (!formData.title) {
-        return setErrors({ markdown: "", title: "Title Field is Requires" });
-      } else {
-        setErrors({ title: "", markdown: "" });
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
+    try {
+      await updateArticle(params.slug, formData);
+
+      toast.success("Article Updated Succefully", toastOptions);
+      setTimeout(() => (window.location = "/"), 3000);
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        toast.error(error.response.data, toastOptions);
       }
     }
   }

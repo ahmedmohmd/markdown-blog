@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import bootstrap from "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import "./styles/glopal.css"
+
 ReactDOM.render(
-  <HashRouter>
+  <BrowserRouter>
     <App />
-  </HashRouter>,
+  </BrowserRouter>,
   document.getElementById("root")
 );

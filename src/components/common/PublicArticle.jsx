@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AiFillEye } from "react-icons/ai";
 import styles from "../../styles/article.module.scss";
 
-function Article({ article }) {
+function PublicArticle({ article }) {
   const navigate = useNavigate();
   return (
     <div className={"card " + styles.article} style={{ width: "18rem" }}>
@@ -21,7 +21,7 @@ function Article({ article }) {
       <div className="card-body">
         <div className="card-title">
           <h4>
-            <Link to={`/myArticles/${article.slug}`} className={styles.link}>
+            <Link to={`/allArticles/${article.slug}`} className={styles.link}>
               {article.title}
             </Link>
           </h4>
@@ -45,7 +45,7 @@ function Article({ article }) {
           }}
         ></p>
         <button
-          onClick={() => navigate(`/myArticles/${article.slug}`)}
+          onClick={() => navigate(`/allArticles/${article.slug}`)}
           className={styles.btn}
         >
           Read
@@ -55,4 +55,4 @@ function Article({ article }) {
   );
 }
 
-export default Article;
+export default PublicArticle;

@@ -1,0 +1,9 @@
+.active {
+  color: #fff !important;
+  background: #0099ff !important;
+}
+
+.deleteBtn.active {
+  background-color: #e91e63 !important;
+  border: 1px solid #e91e63;
+}

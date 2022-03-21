@@ -6,11 +6,8 @@
 
   .link {
     text-decoration: none;
-    color: $elephant;
-
-    &:hover {
-      color: $whale;
-    }
+    color: $whale;
+    font-weight: bold;
   }
 
   .date {

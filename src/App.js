@@ -1,71 +1,114 @@
-import { useEffect, useState } from "react";
-import Articles from "./components/Articles";
+import { useState } from "react";
+import Articles from "./components/UserArticles";
 import CreateArticle from "./components/CreateArticle";
 import { Routes, Route } from "react-router-dom";
-import swal from "sweetalert";
-import { getArticles } from "./services/articles";
 import UpdateArticle from "./components/UpdateArticle";
-import FullArticle from "./components/FullArticle";
+import FullArticle from "./components/UserFullArticle";
 import Home from "./components/Home";
+import PublicArticles from "./components/PublicArticles";
+import PublicFullArticle from "./components/PublicFullArticle";
+import RegisterForm from "./components/RegisterForm";
+import LoginForm from "./components/LoginForm";
+import Header from "./components/common/Header";
+import Footer from "./components/common/Footer";
+import UserProfile from "./components/UserProfile";
+import jwtDecode from "jwt-decode";
+import { useLocation } from "react-router-dom";
+import UpdateUser from "./components/UpdateUser";
+import UserDashboard from "./components/UserDashboard";
+import { useEffect } from "react";
 
 function App() {
-  const [articles, setArticles] = useState([]);
-  const [nextPage, setNextPage] = useState(true);
-  const [prevPage, setPrevPage] = useState(true);
-  const [page, setPage] = useState(1);
-
+  const { pathname } = useLocation();
+  const [user, setUser] = useState({});
   useEffect(() => {
-    const getData = async () => {
-      const data = await getArticles(page);
-      setArticles(data.result);
-      setNextPage(data?.next?.page);
-      setPrevPage(data?.prev?.page);
-    };
-
-    getData();
-  }, [page]);
+    if (localStorage.getItem("token")) {
+      setUser(jwtDecode(localStorage.getItem("token")));
+    }
+  }, [localStorage.getItem("token")]);
 
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/edit/:slug" element={<UpdateArticle />} />
-        <Route path="/new" element={<CreateArticle />} />
-        <Route path="/:slug" element={<FullArticle />} />
-        <Route
-          path="/articles"
-          element={
-            <Articles
-              articles={articles}
-              onNext={nextPageHandler}
-              onPrev={prevPageHandler}
-              next={nextPage}
-              prev={prevPage}
-            />
-          }
-        />
-      </Routes>
+      <Header user={user} />
+      <main>
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/login" element={<LoginForm />} />
+
+          <Route path="/allArticles/:slug" element={<PublicFullArticle />} />
+          <Route path="/allArticles" element={<PublicArticles />} />
+
+          <Route
+            path="/dashboard/*"
+            element={
+              <AuthValidate>
+                <UserDashboard user={user} />
+              </AuthValidate>
+            }
+          />
+
+          <Route
+            path="/edit/:slug"
+            element={
+              <AuthValidate>
+                <UpdateArticle />
+              </AuthValidate>
+            }
+          />
+
+          {/* <Route
+            path="/updateUser"
+            element={
+              <AuthValidate>
+                <UpdateUser user={user} />
+              </AuthValidate>
+            }
+          /> */}
+          <Route
+            path="/myArticles/:slug"
+            element={
+              <AuthValidate>
+                <FullArticle />
+              </AuthValidate>
+            }
+          />
+          {/* <Route
+            path="/new"
+            element={
+              <AuthValidate>
+                <CreateArticle />
+              </AuthValidate>
+            }
+          /> */}
+          {/* <Route
+            path="/profile"
+            element={
+              <AuthValidate>
+                <UserProfile user={user} />
+              </AuthValidate>
+            }
+          /> */}
+          <Route
+            path="/myArticles"
+            element={
+              <AuthValidate>
+                <Articles />
+              </AuthValidate>
+            }
+          />
+        </Routes>
+      </main>
+      {!(pathname === "/") ? <Footer /> : null}
     </div>
   );
 
-  function nextPageHandler() {
-    if (nextPage) {
-      setPage(page + 1);
+  function AuthValidate({ children }) {
+    if (!user) {
+      return (window.location = "/login");
     }
-    window.scroll({
-      top: 0,
-      behaviour: "smooth",
-    });
-  }
 
-  function prevPageHandler() {
-    if (prevPage) {
-      setPage(page - 1);
-    }
-    window.scroll({
-      top: 0,
-      behaviour: "smooth",
-    });
+    return children;
   }
 }
 
