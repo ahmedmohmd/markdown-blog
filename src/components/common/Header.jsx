@@ -1,9 +1,11 @@
+//* Imports
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { logOut } from "../../services/userService";
 import styles from "../../styles/header.module.scss";
 
+//* Header JSX
 function Header({ user }) {
   const navigate = useNavigate();
   return (

@@ -1,3 +1,4 @@
+//* Imports
 import React, { useState } from "react";
 import Joi from "joi";
 import { createArticle } from "../services/articleService";
@@ -8,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { formValidate } from "../helpers/common";
 import { toastOptions } from "../helpers/tokens";
 
+//* CreateArticle JSX
 function CreateArticle() {
   const schema = Joi.object({
     title: Joi.string().required().label("Title"),

@@ -1,6 +1,8 @@
+//* Imports
 import React from "react";
 import { deleteUser } from "../services/userService";
 
+//* UserProfile JSX
 function UserProfile({ user }) {
   return (
     <div>

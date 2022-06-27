@@ -1,5 +1,7 @@
+//* Imports
 import styles from "../../styles/footer.module.scss";
 
+//* Footer JSX
 function Footer() {
   return (
     <div className={styles.footer + " text-center"}>

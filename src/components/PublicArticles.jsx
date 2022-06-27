@@ -1,14 +1,14 @@
+//* Imports
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import Header from "./common/Header";
-import Footer from "./common/Footer";
 import styles from "../styles/UserArticles.module.scss";
 import PublicArticle from "./common/PublicArticle";
 import { useEffect } from "react";
 import { getAllArticles } from "../services/articleService";
 import { useState } from "react";
 
+//* PublicArticles JSX
 function PublicArticles() {
   const [articles, setArticles] = useState([]);
   const [nextPage, setNextPage] = useState(true);

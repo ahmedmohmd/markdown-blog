@@ -1,3 +1,4 @@
+//* Imports
 import React, { useState } from "react";
 import Joi from "joi";
 import { Col, Row, Form, Button } from "react-bootstrap";
@@ -8,6 +9,7 @@ import { formValidate } from "../helpers/common";
 import { toastOptions } from "../helpers/tokens";
 import { signUp } from "../services/userService";
 
+//* RegisterForm JSX
 function RegisterForm() {
   const schema = Joi.object({
     name: Joi.string().required().label("Name"),

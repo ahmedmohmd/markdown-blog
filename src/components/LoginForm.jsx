@@ -1,3 +1,4 @@
+//* Imports
 import React, { useState } from "react";
 import Joi from "joi";
 import { Col, Row, Form, Button } from "react-bootstrap";
@@ -6,8 +7,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formValidate } from "../helpers/common";
 import { toastOptions } from "../helpers/tokens";
-import { logIn, signUp } from "../services/userService";
+import { logIn } from "../services/userService";
 
+//* LoginForm JSX
 function LoginForm() {
   const schema = Joi.object({
     email: Joi.string()

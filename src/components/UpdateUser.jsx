@@ -1,15 +1,15 @@
+//* Imports
 import React, { useState } from "react";
 import Joi from "joi";
 import { Col, Row, Form, Button } from "react-bootstrap";
-import Header from "./common/Header";
 import styles from "../styles/UpdateUser.module.scss";
-import Footer from "./common/Footer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formValidate } from "../helpers/common";
 import { toastOptions } from "../helpers/tokens";
-import { signUp, updateUser } from "../services/userService";
+import { updateUser } from "../services/userService";
 
+//* UpdateUser JSX
 function UpdateUser({ user }) {
   const schema = Joi.object({
     name: Joi.string().required().label("Name"),

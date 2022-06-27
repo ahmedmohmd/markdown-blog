@@ -1,3 +1,4 @@
+//* Imports
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -6,9 +7,9 @@ import swal from "sweetalert";
 import styles from "../styles/UserFullArticle.module.scss";
 import { AiFillEye } from "react-icons/ai";
 import { toast, ToastContainer } from "react-toastify";
-import Header from "./common/Header";
 import { toastOptions } from "../helpers/tokens";
 
+//* FullArticle JSX
 function FullArticle() {
   const params = useParams();
   const navigate = useNavigate();

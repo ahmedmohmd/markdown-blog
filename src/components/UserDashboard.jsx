@@ -1,3 +1,4 @@
+//* Imports
 import React from "react";
 import styles from "../styles/UserDashboard.module.scss";
 import { Routes, Route, NavLink } from "react-router-dom";
@@ -8,6 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { toastOptions } from "../helpers/tokens";
 import swal from "sweetalert";
 
+//* UserDashboard JSX
 function UserDashboard({ user }) {
   return (
     <div className={styles.dashboard}>

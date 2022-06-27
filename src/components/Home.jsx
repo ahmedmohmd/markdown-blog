@@ -1,7 +1,8 @@
+//* Imports
 import React from "react";
-import Header from "./common/Header";
 import styles from "../styles/home.module.scss";
 
+//* Home JSX
 function Home() {
   return (
     <div className={styles.home}>

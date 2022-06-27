@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Articles from "./components/UserArticles";
-import CreateArticle from "./components/CreateArticle";
 import { Routes, Route } from "react-router-dom";
 import UpdateArticle from "./components/UpdateArticle";
 import FullArticle from "./components/UserFullArticle";
@@ -11,10 +10,8 @@ import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
-import UserProfile from "./components/UserProfile";
 import jwtDecode from "jwt-decode";
 import { useLocation } from "react-router-dom";
-import UpdateUser from "./components/UpdateUser";
 import UserDashboard from "./components/UserDashboard";
 import { useEffect } from "react";
 
@@ -57,14 +54,6 @@ function App() {
             }
           />
 
-          {/* <Route
-            path="/updateUser"
-            element={
-              <AuthValidate>
-                <UpdateUser user={user} />
-              </AuthValidate>
-            }
-          /> */}
           <Route
             path="/myArticles/:slug"
             element={
@@ -73,22 +62,7 @@ function App() {
               </AuthValidate>
             }
           />
-          {/* <Route
-            path="/new"
-            element={
-              <AuthValidate>
-                <CreateArticle />
-              </AuthValidate>
-            }
-          /> */}
-          {/* <Route
-            path="/profile"
-            element={
-              <AuthValidate>
-                <UserProfile user={user} />
-              </AuthValidate>
-            }
-          /> */}
+
           <Route
             path="/myArticles"
             element={

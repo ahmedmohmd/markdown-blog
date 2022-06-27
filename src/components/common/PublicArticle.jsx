@@ -1,9 +1,11 @@
+//* Imports
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AiFillEye } from "react-icons/ai";
 import styles from "../../styles/article.module.scss";
 
+//* PublicArticle JSX
 function PublicArticle({ article }) {
   const navigate = useNavigate();
   return (

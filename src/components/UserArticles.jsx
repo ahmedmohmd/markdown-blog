@@ -1,3 +1,4 @@
+//* Imports
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
@@ -9,6 +10,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { getArticles } from "../services/articleService";
 
+//* Articles JSX
 function Articles() {
   const [articles, setArticles] = useState([]);
   const [nextPage, setNextPage] = useState(true);

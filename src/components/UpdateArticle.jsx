@@ -1,3 +1,4 @@
+//* Imports
 import Joi from "joi";
 import React, { useState } from "react";
 import { getArticle, updateArticle } from "../services/articleService";
@@ -11,12 +12,14 @@ import Footer from "./common/Footer";
 import Header from "./common/Header";
 import styles from "../styles/updateArticle.module.scss";
 
+//* Joi Schema
 const schema = Joi.object({
   title: Joi.string().required().label("Title"),
   markdown: Joi.string().required().label("Markdown"),
   cover: Joi.string().uri().optional().allow(""),
 });
 
+//* UpdateArticle JSX
 function UpdateArticle() {
   const params = useParams();
   const [formData, setFormData] = useState({});
