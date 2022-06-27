@@ -2,22 +2,21 @@
 
 By this **Markdown Blog** You can add blogs in **.md**.
 
------
+
+---
 
 # Discreption
 This is a [**Markdown Blog**](https://markdown-blog-orcin.vercel.app/) web app that You can control in Blogs:
   - Create Blog
   - Update Blog
   - Delete Blog
- 
------
 
 # App Features
   - Reponsive
   - Nice Design with Bootstrap Framework
   - Speed & Good Performance
-
------
+  
+---
 
 # Languages & Technologies
 ### Lauages That used in this Web App:
@@ -36,12 +35,14 @@ This is a [**Markdown Blog**](https://markdown-blog-orcin.vercel.app/) web app t
   <a href="https://sass-lang.com/"><img src="https://static-00.iconduck.com/assets.00/sass-icon-512x512-wrsgqu3t.png" width="48" height="48"/></a>
 </div>
 
-### Other Technolohies & Libs:
+### Other Libs & Packages:
+
   - [**__react-router__**](https://reactrouter.com/)
   - [**__axios__**](https://axios-http.com/)
   - [**__react-bootstrap__**](https://react-bootstrap.github.io/)
 
------
+---
 
-# Web App Screenshot
+# App's Screenshot
 ![Markdown Blog App Screenshot](https://github.com/ahmedmohmd/markdown-blog/blob/main/app-screenshot.gif?raw=true)
+
